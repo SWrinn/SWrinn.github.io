@@ -7,6 +7,9 @@
 
     
     <script>
+        var movieTitles;
+        var movieRatings;
+
         function loadXMLDoc() {
           var xmlhttp = new XMLHttpRequest();
           xmlhttp.onreadystatechange = function() {
@@ -24,10 +27,19 @@
             var table="<tr><th>Movie</th><th>IMDB Rating</th></tr>";
             var x = xmlDoc.getElementsByTagName("item");
             for (i = 0; i <x.length; i++) {
+                foundTitle = x[i].getElementsByTagName("movie_name")[0].childNodes[0].nodeValue;
+                foundRating = x[i].getElementsByTagName("movie_rating")[0].childNodes[0].nodeValue;
+
+                movieTitles.push(String(foundTitle));
+                movieRatings.push((String(foundRating)));
+
+                console.log(typeof foundTitle);
+                console.log(typeof foundRating);
+
                 table += "<tr><td>" +
-                x[i].getElementsByTagName("movie_name")[0].childNodes[0].nodeValue +
+                foundTitle +
                 "</td><td>" +
-                x[i].getElementsByTagName("movie_rating")[0].childNodes[0].nodeValue +
+                foundRating +
                 "</td></tr>";
             }
             document.getElementById("demo").innerHTML = table;
