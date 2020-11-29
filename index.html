@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+        <title>Movie Recommender</title>
+    </head>
+
+    
+    <script>
+        function loadXMLDoc() {
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                window.alert("hi");
+                myFunction(this);
+            }
+          };
+          xmlhttp.open("GET", "testOutput.xml", true);
+          xmlhttp.send();
+        }
+
+        function myFunction(xml) {
+            window.alert("in here")
+            var i;
+            var xmlDoc = xml.responseXML;
+            var table="<tr><th>Movie</th><th>IMDB Rating</th></tr>";
+            var x = xmlDoc.getElementsByTagName("CD");
+            for (i = 0; i <x.length; i++) {
+                table += "<tr><td>" +
+                x[i].getElementsByTagName("movie_name")[0].childNodes[0].nodeValue +
+                "</td><td>" +
+                x[i].getElementsByTagName("movie_rating")[0].childNodes[0].nodeValue +
+                "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+        }
+        </script>
+
+    <body onload="loadXMLDoc()">
+        <div>
+            <!-- This will be the heading-->
+            <h1>Movie Recommender</h1>
+        </div>
+        <div>
+            <!-- This will be where the user inputs recommendations-->
+            <table id="demo"></table>
+        </div>
+    </body>
+
+</html>
