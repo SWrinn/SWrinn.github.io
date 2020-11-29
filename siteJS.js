@@ -31,6 +31,7 @@ function myFunction(xml) {
         "</td></tr>";
     }
     document.getElementById("demo").innerHTML = table;
+    autocomplete(document.getElementById("myInput"), movieTitles);
 }
 
 function autocomplete(inp, arr) {
