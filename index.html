@@ -7,10 +7,6 @@
         <title>Movie Recommender</title>
     </head>
 
-    
-    <script>
-        
-    </script>
 
     <body onload="loadXMLDoc()">
         <div>
@@ -20,8 +16,11 @@
         <div>
             <!-- This will be where the user inputs recommendations-->
             <form autocomplete="off" action="/action_page.php">
+                <div>
+                    <input id="userName" type="text" name="userName" placeholder="Your Name">
+                </div>
                 <div class="autocomplete" style="width:300px;">
-                  <input id="myInput" type="text" name="myCountry" placeholder="Country">
+                  <input id="myInput" type="text" name="movieTitle" placeholder="Movie Title">
                 </div>
                 <input type="submit">
             </form>
