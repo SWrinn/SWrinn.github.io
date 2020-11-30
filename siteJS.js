@@ -33,6 +33,7 @@ function myFunction(xml) {
     }
     document.getElementById("demo").innerHTML = table;
     autocomplete(document.getElementById("myInput"), movieTitles);
+    getOtherRatings();
 }
 
 function getOtherRatings(){
