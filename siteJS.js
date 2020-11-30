@@ -1,5 +1,6 @@
 var movieTitles = [];
 var movieRatings = [];
+var userRatings = {};
 
 function loadXMLDoc() {
     var xmlhttp = new XMLHttpRequest();
@@ -129,4 +130,26 @@ function autocomplete(inp, arr) {
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
-  } 
+  }
+
+function addUserRank(){
+    //remember to check that the given values are valid
+    userName = document.getElementById("userName").value;
+    movieName = document.getElementById("myInput").value;
+    userRank = document.getElementById("userRank").value;
+    /*
+        {"userName": {"title": rank, "title": rank}}
+    */
+
+  //check if the user already exists in the JSON
+  if(userRatings.hasOwnProperty(userName)){
+    //add the rating for the given movie
+    userRatings[userName][movieName] = userRank;
+  }else{
+    userRatings[userName] = {};
+    userRatings[userName][movieName] = userRank;
+  }
+
+  console.log(userRatings);
+
+}

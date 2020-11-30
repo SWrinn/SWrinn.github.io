@@ -15,9 +15,10 @@
         </div>
         <div>
             <!-- This will be where the user inputs recommendations-->
-            <form autocomplete="off" action="/action_page.php">
-                <div>
+            <form autocomplete="off" action="javascript:void(0);" onsubmit="addUserRank()">
+                <div class="autocomplete" style="width:300px;">
                     <input id="userName" type="text" name="userName" placeholder="Your Name">
+                    <input id="userRank" type="text" name="userRank" placeholder="Your Ranking">
                 </div>
                 <div class="autocomplete" style="width:300px;">
                   <input id="myInput" type="text" name="movieTitle" placeholder="Movie Title">
