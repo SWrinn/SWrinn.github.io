@@ -136,7 +136,7 @@ function addUserRank(){
     //remember to check that the given values are valid
     userName = document.getElementById("userName").value;
     movieName = document.getElementById("myInput").value;
-    userRank = document.getElementById("userRank").value;
+    userRank = parseFloat(document.getElementById("userRank").value);
     /*
         {"userName": {"title": rank, "title": rank}}
     */
