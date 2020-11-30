@@ -177,7 +177,6 @@ function addUserRank(){
     window.alert("Please choose from the movie titles provided.")
   }
   
-
 }
 
 function isFloat(n){
@@ -186,4 +185,8 @@ function isFloat(n){
 
 function verifyTitle(givenTitle){
   return movieTitles.includes(givenTitle);
+}
+
+function recommendMovie(){
+  //get similarities between people 
 }

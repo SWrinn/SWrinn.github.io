@@ -13,6 +13,18 @@
         <div>
             <!-- This will be the heading-->
             <h1>Movie Recommender</h1>
+            <h3>Please rank at least 3 of the following movies before getting a recommendation:</h3>
+            <ul>
+                <li>Spider-Man: Into the Spider-Verse</li>
+                <li>Avengers: Endgame</li>
+                <li>Love Actually</li>
+                <li>Home Alone</li>
+                <li>Joker</li>
+                <li>The Shawshank Redemption</li>
+                <li>Hamilton</li>
+                <li>The Wolf of Wall Street</li>
+                <li>Interstellar</li>
+            </ul>
             <!-- Note the movies that already have ratings:
                     Spider-Man: Into the Spider-Verse
                     Avengers: Endgame
@@ -36,6 +48,10 @@
                   <input id="myInput" type="text" name="movieTitle" placeholder="Movie Title">
                 </div>
                 <input type="submit" placeholder="Submit Rank">
+            </form>
+
+            <form action="javascript:void(0);" onsubmit="recommendMovie()">
+                <input type="submit" placeholder="Recommend!">
             </form>
             
             <table id="demo"></table>
