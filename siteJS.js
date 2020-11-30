@@ -35,6 +35,11 @@ function myFunction(xml) {
     autocomplete(document.getElementById("myInput"), movieTitles);
 }
 
+function getOtherRatings(){
+  var otherRatings = JSON.parse(users);
+  console.log(otherRatings);
+}
+
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -150,6 +155,6 @@ function addUserRank(){
     userRatings[userName][movieName] = userRank;
   }
 
-  console.log(userRatings);
+  //console.log(userRatings);
 
 }
