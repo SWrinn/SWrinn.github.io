@@ -164,6 +164,11 @@ function addUserRank(){
       userRatings[userName] = {};
       userRatings[userName][movieName] = userRank;
     }
+
+    userName = "";
+    movieName = "";
+    userRank = "";
+
   }else if((userName.length <= 1)){
     window.alert("Please enter your name.");
   }else if(!((isFloat(userRank)) || (Number.isInteger(userRank))) || userRank > 5 || userRank < 1){
