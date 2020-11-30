@@ -43,7 +43,6 @@ function getOtherRatings(){
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       otherRatings = xmlhttp.response;
-      console.log(otherRatings);
     }
   };
 
@@ -150,23 +149,36 @@ function autocomplete(inp, arr) {
   }
 
 function addUserRank(){
-    //remember to check that the given values are valid
-    userName = document.getElementById("userName").value;
-    movieName = document.getElementById("myInput").value;
-    userRank = parseFloat(document.getElementById("userRank").value);
-    /*
-        {"userName": {"title": rank, "title": rank}}
-    */
+  //remember to check that the given values are valid
+  userName = document.getElementById("userName").value;
+  movieName = document.getElementById("myInput").value;
+  userRank = parseFloat(document.getElementById("userRank").value);
 
-  //check if the user already exists in the JSON
-  if(userRatings.hasOwnProperty(userName)){
-    //add the rating for the given movie
-    userRatings[userName][movieName] = userRank;
+  // valid if: user has name, ranking is number and movie title is in the array
+  if((userName.length > 1) && (((isFloat(userRank)) || (Number.isInteger(userRank))) && userRank <= 5 && userRank >= 1) && verifyTitle(movieName)){
+    //check if the user already exists in the JSON
+    if(userRatings.hasOwnProperty(userName)){
+      //add the rating for the given movie
+      userRatings[userName][movieName] = userRank;
+    }else{
+      userRatings[userName] = {};
+      userRatings[userName][movieName] = userRank;
+    }
+  }else if((userName.length <= 1)){
+    window.alert("Please enter your name.");
+  }else if(!((isFloat(userRank)) || (Number.isInteger(userRank))) || userRank > 5 || userRank < 1){
+    window.alert("Please enter a rating between 1 and 5.");
   }else{
-    userRatings[userName] = {};
-    userRatings[userName][movieName] = userRank;
+    window.alert("Please choose from the movie titles provided.")
   }
+  
 
-  //console.log(userRatings);
+}
 
+function isFloat(n){
+  return Number(n) === n && n % 1 !== 0;
+}
+
+function verifyTitle(givenTitle){
+  return movieTitles.includes(givenTitle);
 }
