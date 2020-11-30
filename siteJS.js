@@ -38,8 +38,6 @@ function myFunction(xml) {
 }
 
 function getOtherRatings(){
-  var otherRatings = JSON.parse(users);
-
   var xmlhttp = new XMLHttpRequest();
 
   xmlhttp.onreadystatechange = function() {
