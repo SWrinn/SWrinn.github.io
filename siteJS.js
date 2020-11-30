@@ -1,6 +1,7 @@
 var movieTitles = [];
 var movieRatings = [];
 var userRatings = {};
+var otherRatings = {};
 
 function loadXMLDoc() {
     var xmlhttp = new XMLHttpRequest();
@@ -38,7 +39,19 @@ function myFunction(xml) {
 
 function getOtherRatings(){
   var otherRatings = JSON.parse(users);
-  console.log(otherRatings);
+
+  var xmlhttp = new XMLHttpRequest();
+
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      otherRatings = xmlhttp.response;
+      console.log(otherRatings);
+    }
+  };
+
+  xmlhttp.open("GET", "users.json", true);
+  xmlhttp.responseType = 'json';
+  xmlhttp.send();
 }
 
 function autocomplete(inp, arr) {
