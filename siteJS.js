@@ -165,9 +165,9 @@ function addUserRank(){
       userRatings[userName][movieName] = userRank;
     }
 
-    userName = "";
-    movieName = "";
-    userRank = "";
+    document.getElementById("userName").value = "";
+    document.getElementById("myInput").value = "";
+    document.getElementById("userRank").value = "";
 
   }else if((userName.length <= 1)){
     window.alert("Please enter your name.");
