@@ -51,7 +51,11 @@
             </form>
 
             <form action="javascript:void(0);" onsubmit="recommendMovie()">
-                <input type="submit" placeholder="Recommend!">
+                <div class="autocomplete" style="width:300px;">
+                    <input id="recommendFor" type="text" name="recommendFor" placeholder="Recommend for">
+                </div>
+                
+                <input type="submit" value="Recommend!">
             </form>
             
             <table id="demo"></table>
