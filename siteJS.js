@@ -34,15 +34,15 @@ function myFunction(xml) {
     }
     document.getElementById("demo").innerHTML = table;
     autocomplete(document.getElementById("myInput"), movieTitles);
-    getOtherRatings();
+    getUserRatings();
 }
 
-function getOtherRatings(){
+function getUserRatings(){
   var xmlhttp = new XMLHttpRequest();
 
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      otherRatings = xmlhttp.response;
+      userRatings = xmlhttp.response;
     }
   };
 
@@ -168,6 +168,8 @@ function addUserRank(){
     document.getElementById("userName").value = "";
     document.getElementById("myInput").value = "";
     document.getElementById("userRank").value = "";
+
+    console.log(userRatings);
 
   }else if((userName.length <= 1)){
     window.alert("Please enter your name.");
