@@ -239,7 +239,7 @@ function recommendMovie(){
     var simScores = [];
     console.log(sameUsers.length);
 
-    for(i = 0; i < sameUsers.length; i++){
+    for(var i = 0; i < sameUsers.length; i++){
       console.log(i);
       //get the sim score for each user
       if(i == 7){
@@ -272,9 +272,9 @@ function sim(user1, user2, rankMatrix){
   var u1Avg = 0;
   var u2Avg = 0;
 
-  for(i = 0; i < u1Result.length; i++){
-    u1Avg += u1Result[i];
-    u2Avg += u2Result[i];
+  for(var x = 0; x < u1Result.length; x++){
+    u1Avg += u1Result[x];
+    u2Avg += u2Result[x];
   }
 
   u1Avg = u1Avg / u1Result.length;
@@ -284,10 +284,10 @@ function sim(user1, user2, rankMatrix){
   denU1 = 0;
   denU2 = 0;
 
-  for(i = 0; i < u1Result.length; i++){
-    numerator += (u1Result[i] - u1Avg) * (u2Result[i] - u2Avg);
-    denU1 += Math.pow((u1Result[i] - u1Avg), 2);
-    denU2 += Math.pow((u2Result[i] - u2Avg), 2);
+  for(var d = 0; d < u1Result.length; d++){
+    numerator += (u1Result[d] - u1Avg) * (u2Result[d] - u2Avg);
+    denU1 += Math.pow((u1Result[d] - u1Avg), 2);
+    denU2 += Math.pow((u2Result[d] - u2Avg), 2);
   }
 
   denominator = Math.sqrt(denU1 * denU2);
@@ -302,11 +302,11 @@ function getSameMovies(user1, user2){
   //will return arrays with 0 columns removed
   var newUser1 = [];
   var newUser2 = [];
-  for(i = 0; i < user1.length; i++){
-    if(user1[i] !== 0 && user2[i] !== 0){
+  for(var y = 0; y < user1.length; y++){
+    if(user1[y] !== 0 && user2[y] !== 0){
       //add the values to the new arrays
-      newUser1.push(user1[i]);
-      newUser2.push(user2[i]);
+      newUser1.push(user1[y]);
+      newUser2.push(user2[y]);
     }
   }
 
