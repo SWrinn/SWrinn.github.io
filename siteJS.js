@@ -246,7 +246,7 @@ function recommendMovie(){
         score = sim(currentUser, i, rankMat);
         simScores.push(score);
         console.log(sameUsers[0]);
-        console.log(simScores.length);
+        console.log(simScores);
       }else{
         simScores.push(0);
       }
