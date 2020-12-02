@@ -262,9 +262,6 @@ function sim(user1, user2, rankMatrix){
   var u1Result = result[0];
   var u2Result = result[1];
 
-  console.log(u1Result);
-  console.log(u2Result);
-
   var u1Avg = 0;
   var u2Avg = 0;
 
@@ -286,6 +283,8 @@ function sim(user1, user2, rankMatrix){
   }
 
   denominator = Math.sqrt(denU1 * denU2);
+
+  console.log((numerator / denominator));
 
   return numerator / denominator;
 
