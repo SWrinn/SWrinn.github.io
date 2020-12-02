@@ -169,7 +169,7 @@ function addUserRank(){
     document.getElementById("myInput").value = "";
     document.getElementById("userRank").value = "";
 
-    console.log(userRatings);
+    //console.log(userRatings);
 
   }else if((userName.length <= 1)){
     window.alert("Please enter your name.");
@@ -216,6 +216,7 @@ function recommendMovie(){
     //need: calculate similarities
     //a matrix for the user rankings
     var rankMat = new Array(sameUsers.length);
+    console.log(sameUsers);
 
     for(user in sameUsers){
       var rankRow = new Array(movies.length);
