@@ -150,9 +150,9 @@ function autocomplete(inp, arr) {
 
 function addUserRank(){
   //remember to check that the given values are valid
-  userName = document.getElementById("userName").value;
-  movieName = document.getElementById("myInput").value;
-  userRank = parseFloat(document.getElementById("userRank").value);
+  var userName = document.getElementById("userName").value;
+  var movieName = document.getElementById("myInput").value;
+  var userRank = parseFloat(document.getElementById("userRank").value);
 
   // valid if: user has name, ranking is number and movie title is in the array
   if((userName.length > 1) && (((isFloat(userRank)) || (Number.isInteger(userRank))) && userRank <= 5 && userRank >= 1) && verifyTitle(movieName)){
@@ -190,5 +190,37 @@ function verifyTitle(givenTitle){
 }
 
 function recommendMovie(){
-  //get similarities between people 
+  //get similarities between people
+  var recommendFor = document.getElementById("recommendFor").value;
+
+  if(userRatings.hasOwnProperty(recommendFor)){
+    //get the users that have the same movies
+    //put movies in an array
+    //put users in an array??
+    var movies = []
+    var sameUsers = []
+    for(var movie in userRatings[recommendFor]){
+      movies.push(movie);
+    }
+    for(var users in userRatings){
+      for(var movie in userRatings[users]){
+        if(movies.includes(movie)){
+          sameUsers.push(users);
+        }
+      }
+    }
+    console.log(sameUsers);
+    sameUsers = uniq(sameUsers);
+    console.log(sameUsers);
+
+  }else{
+    window.alert("This user does not have any ratings.");
+  }
+}
+
+function uniq(a) {
+  var seen = {};
+  return a.filter(function(item) {
+      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+  });
 }
