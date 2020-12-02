@@ -218,10 +218,10 @@ function recommendMovie(){
     var rankMat = new Array(sameUsers.length);
     console.log(sameUsers);
 
-    for(user in sameUsers){
+    for(user of sameUsers){
       var rankRow = new Array(movies.length);
       //go through the movies
-      for(movie in movies){
+      for(movie of movies){
         //make a row to put in the array
         console.log(user);
         if(userRatings[user].hasOwnProperty(movie)){
