@@ -249,6 +249,8 @@ function recommendMovie(){
 
     }
 
+    console.log(simScores);
+
   }else{
     window.alert("This user does not have any ratings.");
   }
@@ -256,13 +258,7 @@ function recommendMovie(){
 
 function sim(user1, user2, rankMatrix){
   //get the row then avg for each user
-  console.log(rankMatrix);
-  var count = 0;
-  for(thing of rankMatrix){
-    console.log(thing);
-    console.log(count);
-    count++;
-  }
+
   var result = getSameMovies(rankMatrix[user1], rankMatrix[user2]);
   var u1Result = result[0];
   var u2Result = result[1];
