@@ -245,7 +245,7 @@ function recommendMovie(){
         //call sim, giving i, current and the matrix
         score = sim(currentUser, i, rankMat);
         simScores.push(score);
-        console.log(sameUsers[0]);
+        //console.log(sameUsers[0]);
         console.log(simScores);
       }else{
         simScores.push(0);
@@ -264,6 +264,9 @@ function sim(user1, user2, rankMatrix){
   var result = getSameMovies(rankMatrix[user1], rankMatrix[user2]);
   var u1Result = result[0];
   var u2Result = result[1];
+
+  console.log(u1Result);
+  console.log(u2Result);
 
   var u1Avg = 0;
   var u2Avg = 0;
