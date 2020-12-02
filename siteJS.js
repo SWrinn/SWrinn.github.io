@@ -243,7 +243,8 @@ function recommendMovie(){
       if(i != currentUser){
         //call sim, giving i, current and the matrix
         simScores.push(sim(currentUser, i, rankMat));
-        console.log(simScores);
+        console.log(sameUsers[i]);
+        console.log(simScores.length);
       }else{
         //simScores.push(0);
       }
@@ -276,6 +277,7 @@ function sim(user1, user2, rankMatrix){
   numerator = 0;
   denU1 = 0;
   denU2 = 0;
+
   for(i = 0; i < u1Result.length; i++){
     numerator += (u1Result[i] - u1Avg) * (u2Result[i] - u2Avg);
     denU1 += Math.pow((u1Result[i] - u1Avg), 2);
@@ -283,8 +285,6 @@ function sim(user1, user2, rankMatrix){
   }
 
   denominator = Math.sqrt(denU1 * denU2);
-
-  console.log((numerator / denominator));
 
   return numerator / denominator;
 
