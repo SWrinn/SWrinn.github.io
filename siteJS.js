@@ -237,7 +237,8 @@ function recommendMovie(){
 
     var currentUser = sameUsers.indexOf(recommendFor);
     var simScores = [];
-
+    console.log(sameUsers);
+/*
     for(i = 0; i < sameUsers.length; i++){
       //get the sim score for each user
       if(i !== currentUser){
@@ -251,7 +252,7 @@ function recommendMovie(){
       }
 
     }
-
+*/
   }else{
     window.alert("This user does not have any ratings.");
   }
