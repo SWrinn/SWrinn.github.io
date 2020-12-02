@@ -248,6 +248,8 @@ function recommendMovie(){
 
     }
 
+    console.log(simScores);
+
   }else{
     window.alert("This user does not have any ratings.");
   }
