@@ -216,14 +216,12 @@ function recommendMovie(){
     //need: calculate similarities
     //a matrix for the user rankings
     var rankMat = new Array(sameUsers.length);
-    console.log(sameUsers);
 
     for(user of sameUsers){
       var rankRow = new Array(movies.length);
       //go through the movies
       for(movie of movies){
         //make a row to put in the array
-        console.log(user);
         if(userRatings[user].hasOwnProperty(movie)){
           //this user has rated the movie
           rankRow.push(userRatings[user][movie]);
@@ -243,14 +241,12 @@ function recommendMovie(){
       //get the sim score for each user
       if(i != currentUser){
         //call sim, giving i, current and the matrix
-        simScore.push(sim(currentUser, i, rankMat));
+        simScores.push(sim(currentUser, i, rankMat));
       }else{
         simScores.push(0);
       }
 
     }
-
-    console.log(simScores);
 
   }else{
     window.alert("This user does not have any ratings.");
