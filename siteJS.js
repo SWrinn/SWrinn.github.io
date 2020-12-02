@@ -241,7 +241,7 @@ function recommendMovie(){
 
     for(i = 0; i < sameUsers.length; i++){
       //get the sim score for each user
-      if(i == 1){
+      if(i == 7){
         //call sim, giving i, current and the matrix
         score = sim(currentUser, i, rankMat);
         simScores.push(score);
