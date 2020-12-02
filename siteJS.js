@@ -240,17 +240,28 @@ function recommendMovie(){
 
     for(var i = 0; i < sameUsers.length; i++){
       //get the sim score for each user
-      if(i !== 0){
-        //call sim, giving i, current and the matrix
-        score = sim(currentUser, i, rankMat);
-        simScores.push(score);
-      }else{
-        simScores.push(0);
-      }
-
+      //call sim, giving i, current and the matrix
+      score = sim(currentUser, i, rankMat);
+      simScores.push(score);
     }
+      
+    orderedIndex = getOrder(simScores);
 
-    console.log(simScores);
+    for(var t = 0; t < orderedIndex; t++){
+      //starting from the most similar user, list movies to recommend
+      //don't repeat
+      //don't include movies that teh user has already seen
+      for(var movie in userRatings[sameUsers[orderedIndex[t]]]){
+        //check that the movie is not already in the movies list
+        if(!movies.includes(movie)){
+          //suggest the movie
+          console.log(movie);
+          //avoid repetition
+          movies.push(movie);
+
+        }
+      }
+    }
 
   }else{
     window.alert("This user does not have any ratings.");
@@ -304,4 +315,15 @@ function getSameMovies(user1, user2){
   }
 
   return [newUser1, newUser2];
+}
+
+function getOrder(simResults){
+  var orderedResults = simResults.sort(function(a, b){return a - b});
+  var indexes = [];
+
+  for(var k = 0; k < simResults.length; k++){
+    indexes.push(simResults.indexOf(orderedResults[k]));
+  }
+
+  return indexes;
 }
