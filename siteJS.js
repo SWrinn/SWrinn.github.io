@@ -300,7 +300,7 @@ function getSameMovies(user1, user2){
   var newUser1 = [];
   var newUser2 = [];
   for(i = 0; i < user1.length; i++){
-    if(user1[i] !== 0 && user2 !== 0){
+    if(user1[i] !== 0 && user2[i] !== 0){
       //add the values to the new arrays
       newUser1.push(user1[i]);
       newUser2.push(user2[i]);
