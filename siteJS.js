@@ -236,7 +236,7 @@ function recommendMovie(){
     }
 
     var currentUser = sameUsers.indexOf(recommendFor);
-    var simScores = new Array(sameUsers.length);
+    var simScores = [];
 
     for(i = 0; i < sameUsers.length; i++){
       //get the sim score for each user
