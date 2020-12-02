@@ -215,7 +215,7 @@ function recommendMovie(){
     //Have:movies for recommend for & names of ppl who have at least one movie
     //need: calculate similarities
     //a matrix for the user rankings
-    var rankMat = new Array(sameUsers.length);
+    var rankMat = [];
 
     for(user of sameUsers){
       var rankRow = new Array(movies.length);
