@@ -223,6 +223,7 @@ function recommendMovie(){
       //go through the movies
       for(movie in movies){
         //make a row to put in the array
+        console.log(user);
         if(userRatings[user].hasOwnProperty(movie)){
           //this user has rated the movie
           rankRow.push(userRatings[user][movie]);
