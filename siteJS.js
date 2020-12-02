@@ -242,11 +242,12 @@ function recommendMovie(){
       //get the sim score for each user
       if(i != currentUser){
         //call sim, giving i, current and the matrix
-        simScores.push(sim(currentUser, i, rankMat));
+        score = sim(currentUser, i, rankMat);
+        simScores.push(score);
         console.log(sameUsers[i]);
         console.log(simScores.length);
       }else{
-        //simScores.push(0);
+        simScores.push(0);
       }
 
     }
