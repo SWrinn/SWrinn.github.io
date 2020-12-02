@@ -244,13 +244,13 @@ function recommendMovie(){
         //call sim, giving i, current and the matrix
         score = sim(currentUser, i, rankMat);
         simScores.push(score);
-        //console.log(sameUsers[0]);
-        console.log(simScores);
       }else{
         simScores.push(0);
       }
 
     }
+
+    console.log(simScores);
 
   }else{
     window.alert("This user does not have any ratings.");
