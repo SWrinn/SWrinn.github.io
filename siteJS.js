@@ -258,8 +258,8 @@ function recommendMovie(){
 
 function sim(user1, user2, rankMatrix){
   //get the row then avg for each user
-  console.log(rankMatrix);
-  var result = getSameMovies(rankMatrix[user1], rankMatrix[user2]);
+  console.log(rankMatrix[user1][1]);
+  var result = getSameMovies(rankMatrix[user1][1], rankMatrix[user2][1]);
   var u1Result = result[0];
   var u2Result = result[1];
 
