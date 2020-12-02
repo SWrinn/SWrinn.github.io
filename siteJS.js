@@ -224,8 +224,8 @@ function recommendMovie(){
         //make a row to put in the array
         if(userRatings[user].hasOwnProperty(movie)){
           //this user has rated the movie
-          console.log(userRatings[user][movie]);
-          rankRow.push(userRatings[user][movie]);
+          holder = userRatings[user][movie];
+          rankRow.push(holder);
         }else{
           //the user has not rated the movie
           rankRow.push(0);
