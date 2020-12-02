@@ -237,12 +237,10 @@ function recommendMovie(){
 
     var currentUser = sameUsers.indexOf(recommendFor);
     var simScores = [];
-    console.log(sameUsers.length);
 
     for(var i = 0; i < sameUsers.length; i++){
-      console.log(i);
       //get the sim score for each user
-      if(i == 7){
+      if(i !== 0){
         //call sim, giving i, current and the matrix
         score = sim(currentUser, i, rankMat);
         simScores.push(score);
@@ -266,9 +264,6 @@ function sim(user1, user2, rankMatrix){
   var u1Result = result[0];
   var u2Result = result[1];
 
-  console.log(u1Result);
-  console.log(u2Result);
-
   var u1Avg = 0;
   var u2Avg = 0;
 
@@ -291,8 +286,6 @@ function sim(user1, user2, rankMatrix){
   }
 
   denominator = Math.sqrt(denU1 * denU2);
-
-  console.log("done");
 
   return numerator / denominator;
 
