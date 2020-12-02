@@ -211,18 +211,91 @@ function recommendMovie(){
         }
       }
     }
-    console.log(sameUsers);
-    sameUsers = uniq(sameUsers);
-    console.log(sameUsers);
+
+    //Have:movies for recommend for & names of ppl who have at least one movie
+    //need: calculate similarities
+    //a matrix for the user rankings
+    var rankMat = new Array(sameUsers.length);
+
+    for(user in sameUsers){
+      var rankRow = new Array(movies.length);
+      //go through the movies
+      for(movie in movies){
+        //make a row to put in the array
+        if(userRatings[user].hasOwnProperty(movie)){
+          //this user has rated the movie
+          rankRow.push(userRatings[user][movie]);
+        }else{
+          //the user has not rated the movie
+          rankRow.push(0);
+        }
+
+      }
+      rankMat.push(rankRow);
+    }
+
+    var currentUser = sameUsers.indexOf(recommendFor);
+    var simScores = new Array(sameUsers.length);
+
+    for(i = 0; i < sameUsers.length; i++){
+      //get the sim score for each user
+      if(i != currentUser){
+        //call sim, giving i, current and the matrix
+        simScore.push(sim(currentUser, i, rankMat));
+      }else{
+        simScores.push(0);
+      }
+
+    }
 
   }else{
     window.alert("This user does not have any ratings.");
   }
 }
 
-function uniq(a) {
-  var seen = {};
-  return a.filter(function(item) {
-      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
-  });
+function sim(user1, user2, rankMatrix){
+  //get the row then avg for each user
+  var result = getSameMovies(rankMatrix[user1], rankMatrix[user2]);
+  var u1Result = result[0];
+  var u2Result = result[1];
+
+  var u1Avg = 0;
+  var u2Avg = 0;
+
+  for(i = 0; i < u1Result.length; i++){
+    u1Avg += u1Result[i];
+    u2Avg += u2Result[i];
+  }
+
+  u1Avg = u1Avg / u1Result.length;
+  u2Avg = u2Avg / u2Result.length;
+
+  numerator = 0;
+  denU1 = 0;
+  denU2 = 0;
+  for(i = 0; i < u1Result.length; i++){
+    numerator += (u1Result[i] - u1Avg) * (u2Result[i] - u2Avg);
+    denU1 += Math.pow((u1Result[i] - u1Avg), 2);
+    denU2 += Math.pow((u2Result[i] - u2Avg), 2);
+  }
+
+  denominator = Math.sqrt(denU1 * denU2);
+
+  return numerator / denominator;
+
+}
+
+function getSameMovies(user1, user2){
+  //will return arrays with 0 columns removed
+  var newUser1 = [];
+  var newUser2 = [];
+  for(i = 0; i < user1.length; i++){
+    if(!(user1[i] == 0 || user2 == 0)){
+      //add the values to the new arrays
+      newUser1.push(user1[i]);
+      newUser2.push(user2[i]);
+    }
+  }
+
+  return [newUser1, newUser2];
 }
