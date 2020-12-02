@@ -235,6 +235,8 @@ function recommendMovie(){
       rankMat.push(rankRow);
     }
 
+    console.log(rankMat);
+
     var currentUser = sameUsers.indexOf(recommendFor);
     var simScores = new Array(sameUsers.length);
 
