@@ -267,6 +267,7 @@ function sim(user1, user2, rankMatrix){
   var u2Avg = 0;
 
   for(i = 0; i < u1Result.length; i++){
+    console.log("ah");
     u1Avg += u1Result[i];
     u2Avg += u2Result[i];
   }
@@ -278,12 +279,15 @@ function sim(user1, user2, rankMatrix){
   denU1 = 0;
   denU2 = 0;
   for(i = 0; i < u1Result.length; i++){
+    console.log("oh");
     numerator += (u1Result[i] - u1Avg) * (u2Result[i] - u2Avg);
     denU1 += Math.pow((u1Result[i] - u1Avg), 2);
     denU2 += Math.pow((u2Result[i] - u2Avg), 2);
   }
 
   denominator = Math.sqrt(denU1 * denU2);
+
+  console.log("done");
 
   return numerator / denominator;
 
