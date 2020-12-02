@@ -205,7 +205,9 @@ function recommendMovie(){
     for(var users in userRatings){
       for(var movie in userRatings[users]){
         if(movies.includes(movie)){
-          sameUsers.push(users);
+          if(!sameUsers.includes(users)){
+            sameUsers.push(users);
+          }
         }
       }
     }
