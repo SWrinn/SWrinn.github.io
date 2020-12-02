@@ -218,7 +218,7 @@ function recommendMovie(){
     var rankMat = [];
 
     for(user of sameUsers){
-      var rankRow = new Array(movies.length);
+      var rankRow = [];
       //go through the movies
       for(movie of movies){
         //make a row to put in the array
@@ -263,7 +263,7 @@ function sim(user1, user2, rankMatrix){
     console.log(count);
     count++;
   }
-  var result = getSameMovies(rankMatrix[user1][1], rankMatrix[user2][1]);
+  var result = getSameMovies(rankMatrix[user1], rankMatrix[user2]);
   var u1Result = result[0];
   var u2Result = result[1];
 
