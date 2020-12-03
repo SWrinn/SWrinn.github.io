@@ -249,7 +249,7 @@ function recommendMovie(){
 
     console.log("moving on");
 
-    for(var t = 0; t < orderedIndex; t++){
+    for(var t = 0; t < orderedIndex.length; t++){
       //starting from the most similar user, list movies to recommend
       //don't repeat
       //don't include movies that teh user has already seen
