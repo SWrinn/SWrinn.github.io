@@ -247,11 +247,15 @@ function recommendMovie(){
       
     orderedIndex = getOrder(simScores);
 
+    console.log("moving on");
+
     for(var t = 0; t < orderedIndex; t++){
       //starting from the most similar user, list movies to recommend
       //don't repeat
       //don't include movies that teh user has already seen
+      console.log("entrance");
       for(var movie in userRatings[sameUsers[orderedIndex[t]]]){
+        console.log("here?");
         //check that the movie is not already in the movies list
         if(!movies.includes(movie)){
           //suggest the movie
@@ -318,6 +322,7 @@ function getSameMovies(user1, user2){
 }
 
 function getOrder(simResults){
+  console.log("in here");
   var orderedResults = simResults.sort(function(a, b){return a - b});
   var indexes = [];
 
