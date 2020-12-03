@@ -243,10 +243,13 @@ function recommendMovie(){
     var currentUser = sameUsers.indexOf(recommendFor);
     var simScores = [];
 
+    var table = "<tr><th>User</th><th>Similarity</th></tr>";
+
     for(var i = 0; i < sameUsers.length; i++){
       //get the sim score for each user
       //call sim, giving i, current and the matrix
       score = sim(currentUser, i, rankMat);
+      table += "<tr><td>" + sameUsers[i] + "</td><td>" + score + "</td></tr>";
       simScores.push(score);
     }
       
