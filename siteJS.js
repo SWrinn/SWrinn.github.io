@@ -252,11 +252,13 @@ function recommendMovie(){
       table += "<tr><td>" + sameUsers[i] + "</td><td>" + score + "</td></tr>";
       simScores.push(score);
     }
+
+    document.getElementById("similarities").innerHTML = table;
       
     //get an array with the indices in order of most similar to least
     orderedIndex = getOrder(simScores);
 
-    var table="<tr><th>Movie Recommendations</th></tr><ol>";
+    table="<tr><th>Movie Recommendations</th></tr><ol>";
 
     for(var t = 0; t < orderedIndex.length; t++){
       //starting from the most similar user, list movies to recommend
