@@ -169,8 +169,6 @@ function addUserRank(){
     document.getElementById("myInput").value = "";
     document.getElementById("userRank").value = "";
 
-    //console.log(userRatings);
-
   }else if((userName.length <= 1)){
     window.alert("Please enter your name.");
   }else if(!((isFloat(userRank)) || (Number.isInteger(userRank))) || userRank > 5 || userRank < 1){
@@ -247,25 +245,26 @@ function recommendMovie(){
       
     orderedIndex = getOrder(simScores);
 
-    console.log("moving on");
+    var table="<tr><th>Movie</th></tr>";
 
     for(var t = 0; t < orderedIndex.length; t++){
       //starting from the most similar user, list movies to recommend
       //don't repeat
       //don't include movies that teh user has already seen
-      console.log("entrance");
       for(var movie in userRatings[sameUsers[orderedIndex[t]]]){
-        console.log("here?");
         //check that the movie is not already in the movies list
         if(!movies.includes(movie)){
           //suggest the movie
           console.log(movie);
+          table += "<tr><td>" + movie + "</td></tr>";
           //avoid repetition
           movies.push(movie);
 
         }
       }
     }
+
+    document.getElementById("demo").innerHTML = table;
 
   }else{
     window.alert("This user does not have any ratings.");
@@ -322,7 +321,6 @@ function getSameMovies(user1, user2){
 }
 
 function getOrder(simResults){
-  console.log("in here");
   var orderedResults = simResults.sort(function(a, b){return a - b});
   var indexes = [];
 
