@@ -253,7 +253,7 @@ function recommendMovie(){
     //get an array with the indices in order of most similar to least
     orderedIndex = getOrder(simScores);
 
-    var table="<tr><th>Movie Recommendation</th></tr>";
+    var table="<tr><th>Movie Recommendations</th></tr><ol>";
 
     for(var t = 0; t < orderedIndex.length; t++){
       //starting from the most similar user, list movies to recommend
@@ -263,7 +263,7 @@ function recommendMovie(){
         //check that the movie is not already in the movies list
         if(!movies.includes(movie)){
           //suggest the movie
-          table += "<tr><td>" + movie + "</td></tr>";
+          table += "<li>" + movie + "</li>";
           //avoid repetition
           movies.push(movie);
 
@@ -272,7 +272,7 @@ function recommendMovie(){
     }
 
     //change the table to the recommendations
-    document.getElementById("demo").innerHTML = table;
+    document.getElementById("demo").innerHTML = table + "</ol>";
 
   }else{
     window.alert("This user does not have any ratings.");
