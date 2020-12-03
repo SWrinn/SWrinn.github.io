@@ -4,40 +4,40 @@ var userRatings = {};
 var otherRatings = {};
 
 function loadXMLDoc() {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            myFunction(this);
-        }
-    };
-    xmlhttp.open("GET", "testOutput.xml", true);
-    xmlhttp.send();
+  //open the pulled info from IMDB
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          myFunction(this);
+      }
+  };
+  xmlhttp.open("GET", "movieDetails.xml", true);
+  xmlhttp.send();
 }
 
 function myFunction(xml) {
-    var i;
-    var xmlDoc = xml.responseXML;
-    var table="<tr><th>Movie</th><th>IMDB Rating</th></tr>";
-    var x = xmlDoc.getElementsByTagName("item");
-    for (i = 0; i <x.length; i++) {
-        foundTitle = x[i].getElementsByTagName("movie_name")[0].childNodes[0].nodeValue;
-        foundRating = x[i].getElementsByTagName("movie_rating")[0].childNodes[0].nodeValue;
+  //adds the IMDB info to the table, then calls other functions to initialize
+  var i;
+  var xmlDoc = xml.responseXML;
+  var table="<tr><th>Movie</th><th>IMDB Rating</th></tr>";
+  var x = xmlDoc.getElementsByTagName("item");
+  for (i = 0; i <x.length; i++) {
+      foundTitle = x[i].getElementsByTagName("movie_name")[0].childNodes[0].nodeValue;
+      foundRating = x[i].getElementsByTagName("movie_rating")[0].childNodes[0].nodeValue;
 
-        movieTitles.push(foundTitle);
-        movieRatings.push((foundRating));
+      //add the information to the corresponding arrays
+      movieTitles.push(foundTitle);
+      movieRatings.push((foundRating));
 
-        table += "<tr><td>" +
-        foundTitle +
-        "</td><td>" +
-        foundRating +
-        "</td></tr>";
-    }
-    document.getElementById("demo").innerHTML = table;
-    autocomplete(document.getElementById("myInput"), movieTitles);
-    getUserRatings();
+      table += "<tr><td>" + foundTitle + "</td><td>" + foundRating + "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+  autocomplete(document.getElementById("myInput"), movieTitles);
+  getUserRatings();
 }
 
 function getUserRatings(){
+  //reads the user ratings from the JSON file
   var xmlhttp = new XMLHttpRequest();
 
   xmlhttp.onreadystatechange = function() {
@@ -161,11 +161,12 @@ function addUserRank(){
       //add the rating for the given movie
       userRatings[userName][movieName] = userRank;
     }else{
+      //add the user and then the rating for the given movie
       userRatings[userName] = {};
       userRatings[userName][movieName] = userRank;
     }
 
-    document.getElementById("userName").value = "";
+    //document.getElementById("userName").value = "";
     document.getElementById("myInput").value = "";
     document.getElementById("userRank").value = "";
 
@@ -180,59 +181,65 @@ function addUserRank(){
 }
 
 function isFloat(n){
+  //returns true if n is a float and false otherwise
   return Number(n) === n && n % 1 !== 0;
 }
 
 function verifyTitle(givenTitle){
+  //checks that the title matches any one from the IMDB pull
   return movieTitles.includes(givenTitle);
 }
 
 function recommendMovie(){
   //get similarities between people
+  //name of the user to recommend for
   var recommendFor = document.getElementById("recommendFor").value;
 
   if(userRatings.hasOwnProperty(recommendFor)){
     //get the users that have the same movies
     //put movies in an array
-    //put users in an array??
+    //put users in an array
     var movies = []
     var sameUsers = []
     for(var movie in userRatings[recommendFor]){
+      //get the movies the current user has rated
       movies.push(movie);
     }
     for(var users in userRatings){
       for(var movie in userRatings[users]){
         if(movies.includes(movie)){
           if(!sameUsers.includes(users)){
+            //users that have watched the same movies as the current user
             sameUsers.push(users);
           }
         }
       }
     }
 
-    //Have:movies for recommend for & names of ppl who have at least one movie
-    //need: calculate similarities
     //a matrix for the user rankings
     var rankMat = [];
 
+    //for each user that has watched the same movies, make a row with their rankings for the movies
     for(user of sameUsers){
+      //make a row to put in the array
       var rankRow = [];
       //go through the movies
       for(movie of movies){
-        //make a row to put in the array
         if(userRatings[user].hasOwnProperty(movie)){
           //this user has rated the movie
           holder = parseFloat(userRatings[user][movie]);
           rankRow.push(holder);
         }else{
-          //the user has not rated the movie
+          //the user has not rated the movie; make entry 0
           rankRow.push(0);
         }
 
       }
+      //add the row to the matrix
       rankMat.push(rankRow);
     }
 
+    //get the index of the current user
     var currentUser = sameUsers.indexOf(recommendFor);
     var simScores = [];
 
@@ -243,9 +250,10 @@ function recommendMovie(){
       simScores.push(score);
     }
       
+    //get an array with the indices in order of most similar to least
     orderedIndex = getOrder(simScores);
 
-    var table="<tr><th>Movie</th></tr>";
+    var table="<tr><th>Movie Recommendation</th></tr>";
 
     for(var t = 0; t < orderedIndex.length; t++){
       //starting from the most similar user, list movies to recommend
@@ -255,7 +263,6 @@ function recommendMovie(){
         //check that the movie is not already in the movies list
         if(!movies.includes(movie)){
           //suggest the movie
-          console.log(movie);
           table += "<tr><td>" + movie + "</td></tr>";
           //avoid repetition
           movies.push(movie);
@@ -264,6 +271,7 @@ function recommendMovie(){
       }
     }
 
+    //change the table to the recommendations
     document.getElementById("demo").innerHTML = table;
 
   }else{
@@ -274,10 +282,12 @@ function recommendMovie(){
 function sim(user1, user2, rankMatrix){
   //get the row then avg for each user
 
+  //get the ratings for movies both have rated
   var result = getSameMovies(rankMatrix[user1], rankMatrix[user2]);
   var u1Result = result[0];
   var u2Result = result[1];
 
+  //get each user's average rating
   var u1Avg = 0;
   var u2Avg = 0;
 
@@ -289,6 +299,7 @@ function sim(user1, user2, rankMatrix){
   u1Avg = u1Avg / u1Result.length;
   u2Avg = u2Avg / u2Result.length;
 
+  //calculate the Pearson correlation coefficient
   numerator = 0;
   denU1 = 0;
   denU2 = 0;
@@ -321,12 +332,14 @@ function getSameMovies(user1, user2){
 }
 
 function getOrder(simResults){
+  //sort the similarity scores
   var orderedResults = simResults.sort(function(a, b){return a - b});
-  var indexes = [];
+  var indices = [];
 
+  //get the original indices for each sorted item
   for(var k = 0; k < simResults.length; k++){
-    indexes.push(simResults.indexOf(orderedResults[k]));
+    indices.push(simResults.indexOf(orderedResults[k]));
   }
 
-  return indexes;
+  return indices;
 }
